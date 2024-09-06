@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rules Management</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"> <!-- Modern Font -->
+</head>
+<body>
+
+    <header>
+        <nav>
+            <h1>Rules Management System</h1>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Current Rules Section -->
+        <section id="current-rules-section" class="section">
+            <div class="container">
+                <h2>Current Rules</h2>
+                <table id="rules-table">
+                    <thead>
+                        <tr>
+                            <th>Condition</th> <!-- This is for the condition column -->
+                            <th style="text-align: right; border-left: none;">
+                                <button id="edit-rules" style="display: none;">Edit</button>
+                                <button id="done-editing" style="display: none;">Done</button>
+                            </th> <!-- This is for the buttons column -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Existing rules will be inserted here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- AI Generated Rule Suggestions Section -->
+        <section id="ai-response-section" class="section">
+            <div class="container">
+                <h2>AI Generated Rule Suggestions</h2>
+                <div id="ai-error-message" class="error-message"></div>
+                <div id="loading-indicator" style="display: none;" class="loading">Loading...</div>
+                <table id="ai-rules-table">
+                    <thead>
+                        <tr>
+                            <th>Condition</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- AI rules will be inserted here -->
+                    </tbody>
+                </table>
+                <button id="approve-rules" style="display: none;">Approve AI Rules</button>
+            </div>
+        </section>
+
+        <!-- New rule input box -->
+        <section id="add-rule-form" class="section">
+            <div class="container">
+                <h2>Enter a New Rule Condition</h2>
+                <textarea id="rule-condition" rows="3" cols="50" placeholder="Enter the rule condition"></textarea>
+                <button id="submit-to-ai">Submit to AI</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 <a href="https://github.com/yossefkhader" target="_blank">YossefK9</a>. All rights reserved.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

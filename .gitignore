@@ -1,0 +1,33 @@
+# Node modules (dependencies)
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# dotenv environment variable files (useful if you're using a .env file locally)
+.env
+
+# Binaries
+.DS_Store
+*.swp
+
+# IDE/editor-specific files
+.vscode/
+.idea/
+
+# Heroku might auto-generate some files which you don't want to track
+.heroku/
+
+# Compiled files
+dist/
+build/

@@ -1,0 +1,46 @@
+[
+  {
+    "id": "rule-2",
+    "condition": "If message body starts with: Hi Haitham, or all other variations [Haitham Hi, Dear Haitham, Haitha], this email is important"
+  },
+  {
+    "id": "rule-3",
+    "condition": "If the message body includes tasks and it's directed to me in TO, this email is important"
+  },
+  {
+    "id": "rule-1",
+    "condition": "If I'm the only one in the TO field, and no CC, the email is important - Stop checking"
+  },
+  {
+    "id": "rule-2",
+    "condition": "If the message body starts with: Hi Haitham, or all other variations [Haitham Hi, Dear Haitham, Haitha], Stop Checking, this email is important"
+  },
+  {
+    "id": "rule-3",
+    "condition": "If the message body includes tasks and it's directed to me in TO, this email is important"
+  },
+  {
+    "id": "rule-1",
+    "condition": "If I'm the only one in TO field, and no CC, this email is important"
+  },
+  {
+    "id": "rule-2",
+    "condition": "If the message body starts with: Hi Haitham, or all other variations [Haitham Hi, Dear Haitham, Haitha], this email is important"
+  },
+  {
+    "id": "rule-3",
+    "condition": "If the message body includes tasks and it's directed to me in TO, this email is important"
+  },
+  {
+    "id": "rule-1",
+    "condition": "If I'm the only one in TO field and there's no CC, this email is important"
+  },
+  {
+    "id": "rule-2",
+    "condition": "If the message body starts with: Hi Haitham, or all other variations [Haitham Hi, Dear Haitham, Haitha], this email is important"
+  },
+  {
+    "id": "rule-3",
+    "condition": "If the message body includes tasks and it's directed to me in TO, this email is important"
+  }
+]
