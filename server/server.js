@@ -4,21 +4,43 @@ const path = require('path');
 const app = express();
 const OpenAI = require("openai");
 const messages = require('../messages');
-// require('dotenv').config();
-// // const dotenv = require('dotenv');
-// // dotenv.config(path.join(__dirname,'..','.env'));
-
-console.log('Loaded API Key:', process.env.OPENAI_API_KEY);
-
+require('dotenv').config();
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../public')));
 
-const jsonFilePath = path.join(__dirname, '../public/data/rules.json');
+const rulesFilePath = path.join(__dirname, '../public/data/rules.json');
+// Define userData based on environment variables
+const userData = {
+    username: process.env.USER_NAME || 'Unknown',  // Default value if undefined
+    usernameVariations: process.env.USER_NAME_VARIATIONS || 'No variations provided',  // Leave as string
+    userEmail: process.env.USER_EMAIL || 'noemail@example.com'  // Default email if undefined
+};
+
+// API to fetch user data (uses environment variables directly)
+app.get('/api/user-data', (req, res) => {
+    try {
+        // Build the user data object to return (no parsing for usernameVariations)
+        const responseData = {
+            username: userData.username,
+            usernameVariations: userData.usernameVariations,  // Keep as a string
+            userEmail: userData.userEmail
+        };
+
+        // Respond with the user data
+        res.json(responseData);
+    } catch (error) {
+        // Handle any potential errors
+        return res.status(500).json({
+            error: 'Failed to retrieve user data.',
+            details: error.message
+        });
+    }
+});
 
 // API to fetch rules from rules.json
 app.get('/api/rules', (req, res) => {
-    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+    fs.readFile(rulesFilePath, 'utf8', (err, data) => {
         if (err) {
             return res.status(500).json({ error: 'Error reading rules file, try to submit a rule.' });
         }
@@ -101,7 +123,7 @@ app.post('/api/save-rule', (req, res) => {
     const newRules = req.body.rules;  // The approved AI-generated rules (should be an array)
 
     // Read the existing rules.json file
-    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+    fs.readFile(rulesFilePath, 'utf8', (err, data) => {
         if (err) {
             // If the file does not exist, start with an empty array
             if (err.code === 'ENOENT') {
@@ -124,7 +146,7 @@ app.post('/api/save-rule', (req, res) => {
                 const updatedRules = [...existingRules, ...newRules];  // Merge the arrays
 
                 // Write the updated rules back to the rules.json file
-                fs.writeFile(jsonFilePath, JSON.stringify(updatedRules, null, 2), 'utf8', (err) => {
+                fs.writeFile(rulesFilePath, JSON.stringify(updatedRules, null, 2), 'utf8', (err) => {
                     if (err) return res.status(500).json({ error: 'Error saving rules' });
                     res.json({ message: 'Rules saved successfully' });
                 });
@@ -141,7 +163,7 @@ app.post('/api/delete-rule', (req, res) => {
     const updatedRules = req.body.rules;  // The updated array of rules
 
     // Write the updated rules back to the rules.json file
-    fs.writeFile(jsonFilePath, JSON.stringify(updatedRules, null, 2), 'utf8', (err) => {
+    fs.writeFile(rulesFilePath, JSON.stringify(updatedRules, null, 2), 'utf8', (err) => {
         if (err) {
             return res.status(500).json({ error: 'Error saving updated rules' });
         }
@@ -149,7 +171,8 @@ app.post('/api/delete-rule', (req, res) => {
     });
 });
 
+const port = process.env.PORT || 3000; // Use Heroku's port or default to 3000
 // Start the server
-app.listen(3000, () => {
-    console.log('Server running on http://localhost:3000');
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
